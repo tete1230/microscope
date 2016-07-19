@@ -2,6 +2,10 @@
   <div class="post">
     <div class="post-content">
       <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
+      <p>
+        submitted by 提交帖子是由 {{author}}
+        {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit 编 辑</a>{{/if}}
+      </p>
     </div>
     <a href="{{pathFor 'postPage'}}" class="discuss btn btn-default">Discuss评论</a>
   </div>
