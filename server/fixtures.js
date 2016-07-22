@@ -1,4 +1,4 @@
-// Fixture data
+// Fixture data 测试数据
 if (Posts.find().count() === 0) {
   var now = new Date().getTime();
 
@@ -7,7 +7,6 @@ if (Posts.find().count() === 0) {
     profile: { name: 'Tom Coleman 设计大神' }
   });
   var tom = Meteor.users.findOne(tomId);
-  
   var sachaId = Meteor.users.insert({
     profile: { name: 'Sacha Greif 设计师' }
   });
@@ -18,7 +17,8 @@ if (Posts.find().count() === 0) {
     userId: sacha._id,
     author: sacha.profile.name,
     url: 'http://www.baidu.com',
-    submitted: new Date(now - 7 * 3600 * 1000)
+    submitted: new Date(now - 7 * 3600 * 1000),
+    commentsCount: 2
   });
 
   Comments.insert({
@@ -42,7 +42,8 @@ if (Posts.find().count() === 0) {
     userId: tom._id,
     author: tom.profile.name,
     url: 'http://www.qq.com',
-    submitted: new Date(now - 10 * 3600 * 1000)
+    submitted: new Date(now - 10 * 3600 * 1000),
+    commentsCount: 0
   });
 
   Posts.insert({
@@ -50,6 +51,18 @@ if (Posts.find().count() === 0) {
     userId: tom._id,
     author: tom.profile.name,
     url: 'http://www.dytt8.net',
-    submitted: new Date(now - 12 * 3600 * 1000)
+    submitted: new Date(now - 12 * 3600 * 1000),
+    commentsCount: 0
   });
+
+  for (var i = 0; i < 10; i++) {
+    Posts.insert({
+      title: 'Test post 这帖子 #' + i,
+      author: sacha.profile.name,
+      userId: sacha._id,
+      url: 'http://google.com/?q=test-' + i,
+      submitted: new Date(now - i * 3600 * 1000),
+      commentsCount: 0
+    });
+  }
 }
